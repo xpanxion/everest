@@ -1,0 +1,11 @@
+Webcontent
+src/main/webapp/bin
+.project
+.classpath
+target
+.settings/org.eclipse.jdt.core.prefs
+.settings
+src/main/webapp/META-INF
+.orig
+test-output/
+test.jpg
