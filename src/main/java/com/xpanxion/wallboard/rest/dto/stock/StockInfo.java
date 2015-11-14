@@ -17,7 +17,6 @@ public class StockInfo {
 	private String lastPrice;
 	private String name;
 	private long retrievalTime;
-	private String status;
 	private String symbol;
 
 	/**
@@ -54,13 +53,6 @@ public class StockInfo {
 	@JsonIgnore()
 	public long getRetrievalTime() {
 		return this.retrievalTime;
-	}
-
-	/**
-	 * @return the status
-	 */
-	public String getStatus() {
-		return this.status;
 	}
 
 	/**
@@ -113,15 +105,6 @@ public class StockInfo {
 	@JsonIgnore()
 	public void setRetrievalTime(long retrevalTime) {
 		this.retrievalTime = retrevalTime;
-	}
-
-	/**
-	 * @param status
-	 *            the status to set
-	 */
-	@JsonProperty("Status")
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	/**

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -74,6 +75,9 @@ public class Locale implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "locale")
 	private List<Employee> employees;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private LocaleTheme theme;
 
 	public Long getId() {
 		return id;
@@ -186,4 +190,19 @@ public class Locale implements Serializable {
 	public void setStocks(List<StockInfo> stocks) {
 		this.stocks = stocks;
 	}
+	
+	/**
+	 * @return the theme
+	 */
+	public LocaleTheme getTheme() {
+		return theme;
+	}
+
+	/**
+	 * @param theme the theme to set
+	 */
+	public void setTheme(LocaleTheme theme) {
+		this.theme = theme;
+	}
+
 }

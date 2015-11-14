@@ -2,13 +2,16 @@
 -- library. Intended for development purposes only, this feature can be disabled by removing the 
 -- line for 'spring.jpa.hibernate.ddl-auto' in application.properties.
 
-INSERT INTO locale(code, name, time_zone, weather_code, stock_symbols, news_keywords) VALUES("A", "Atlanta", "US/Eastern", "USGA0028", "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, stock_symbols, news_keywords) VALUES("K", "Kearney", "US/Central", "USNE0265", "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, stock_symbols, news_keywords) VALUES("P", "Pune", "IST", "INXX0102", "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, stock_symbols, news_keywords) VALUES("I", "Ames", "US/Central", "USIA0026", "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, stock_symbols, news_keywords) VALUES("C", "Aliso Viejo", "US/Pacific", "USCA0014", "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, stock_symbols, news_keywords) VALUES("M", "Manhattan", "US/Central", "USKS0358", "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, stock_symbols, news_keywords) VALUES("FC", "Fort Collins", "US/Mountain", "USCO0105", "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale_theme(name, description) VALUES("basic", "Basic theme");
+INSERT INTO locale_theme(name, description) VALUES("modern", "Modern theme");
+
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("A", "Atlanta", "US/Eastern", "USGA0028", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("K", "Kearney", "US/Central", "USNE0265", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("P", "Pune", "IST", "INXX0102", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("I", "Ames", "US/Central", "USIA0026", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("C", "Aliso Viejo", "US/Pacific", "USCA0014", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("M", "Manhattan", "US/Central", "USKS0358", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("FC", "Fort Collins", "US/Mountain", "USCO0105", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
 
 INSERT INTO locale_alias(locale_code, alias) VALUES("K", "nebraska");
 INSERT INTO locale_alias(locale_code, alias) VALUES("K", "kearney");
