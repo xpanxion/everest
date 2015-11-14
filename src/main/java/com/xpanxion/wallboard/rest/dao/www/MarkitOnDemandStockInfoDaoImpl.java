@@ -32,6 +32,12 @@ public class MarkitOnDemandStockInfoDaoImpl implements StockInfoDao {
 	private final String stockURLPattern = "http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol=%s";
 	private final Integer timeInCache = 300000;
 
+	private static final ObjectMapper mapper = new ObjectMapper();
+	
+	static {
+		mapper.configure(MapperFeature.USE_ANNOTATIONS, true);
+	}
+	
 	@Override
 	public StockInfo getStockInfo(String symbol) throws StockNotFoundException {
 		StockInfo cacheValue = this.cache.get(symbol);
@@ -62,9 +68,7 @@ public class MarkitOnDemandStockInfoDaoImpl implements StockInfoDao {
 	 */
 	private StockInfo parseStockFromFeed(String symbol) throws StockNotFoundException {
 		StockInfo stockInfo = null;
-		
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.configure(MapperFeature.USE_ANNOTATIONS, true);
+
 		final String url = String.format(this.stockURLPattern, symbol);
 		try (final BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream()))) {
 			

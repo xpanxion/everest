@@ -8,10 +8,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xpanxion.wallboard.rest.dao.NewsDao;
 
 @Repository
@@ -23,7 +29,16 @@ public class GoogleNewsDaoImpl implements NewsDao {
 	public static final String QUOTATION = "\"";
 	public static final String OR_CONCATENATION = "+OR+";
 	
-	private final String newsUrlFormat = "http://news.google.com/news?pz=1&cf=all&ned=us&output=rss&hl=en&num=4&q=%s";
+	public static final String GOOGLE_NEWS_API_FMT = "";
+	public static final String GOOGLE_FEED_API_NEWS_FMT = "https://ajax.googleapis.com/ajax/services/feed/find?v=1.0&q=\"news\"+AND+%s";
+	
+	private final String newsUrlFormat = GOOGLE_FEED_API_NEWS_FMT;
+	
+	private static final ObjectMapper mapper = new ObjectMapper();
+	
+	static {
+		mapper.configure(MapperFeature.USE_ANNOTATIONS, true);
+	}
 	
 	@Override
 	public List<String> getNews(List<String> keywords) {
@@ -40,23 +55,34 @@ public class GoogleNewsDaoImpl implements NewsDao {
 	}
 	
 	private List<String> fetchNewsFromGoogle(String url) {
-		final List<String> news = new ArrayList<String>();
-		final String feedURL = url + "&nocache=" + System.currentTimeMillis();
-		LOG.debug("Pulling news data from '{}'.", url);
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(feedURL).openStream()))) {
-			String line = reader.readLine();
-			while (line != null) {
-				news.add(line);
-				line = reader.readLine();
-			}
-			LOG.debug("{} in retrieving news data. Data set was {} empty.",
-					news.isEmpty() ? "Failed" : "Succeeded",
-					news.isEmpty() ? "" : "not");
+		final List<String> news = new ArrayList<>();
+		
+		final StringBuilder builder = new StringBuilder();
+		String line;
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openConnection().getInputStream()))) {
+			while((line = reader.readLine()) != null) {
+				builder.append(line);
+			} 
 		} catch (MalformedURLException e) {
 			LOG.error("Problem pulling news feed", e);
 		} catch (IOException e) {
 			LOG.error("Problem pulling news feed", e);
 		}
+		
+		try {
+			final JSONObject jsonResponse = new JSONObject(builder.toString());
+			if (HttpServletResponse.SC_OK == jsonResponse.getInt("responseStatus")) {
+				final JSONArray newsEntriesJson = jsonResponse.getJSONObject("responseData").getJSONArray("entries");
+				for(int i = 0; i < newsEntriesJson.length(); i++) {
+					news.add(newsEntriesJson.getJSONObject(i).toString());
+				}
+			}
+		} catch (Exception e) {
+			LOG.error("Error extracting news content from json content {}", builder, e);
+		}
+		
 		return news;
 	}
+	
+	
 }

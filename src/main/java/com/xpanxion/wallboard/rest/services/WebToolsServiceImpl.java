@@ -43,6 +43,9 @@ public class WebToolsServiceImpl implements WebToolsService {
 		}
 	}
 
+	/**
+	 * TODO - Return a <tt>List</tt> of POJO objects (e.g. <tt>NewsContent</tt> instead of <tt>String</tt>)
+	 */
 	@Override
 	public List<String> getNews(String keywords) {
 		
