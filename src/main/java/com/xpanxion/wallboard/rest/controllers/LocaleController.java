@@ -25,7 +25,7 @@ public class LocaleController {
 	@Autowired
 	private WebToolsService webToolsService;
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/locales/{location}")
+	@RequestMapping(value = "/api/{version}/{rendition}/locales/{location}")
 	public Locale getLocale(@PathVariable String location) {
 		final Locale locale = this.localeService.getLocale(location);
 		if (null != locale) {
@@ -36,7 +36,7 @@ public class LocaleController {
 		return locale;
 	}
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/locales/{location}/weather", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/{version}/{rendition}/locales/{location}/weather", method = RequestMethod.GET)
 	public Weather getWeather(@PathVariable String location) {
 		final Locale locale = this.localeService.getLocale(location);
 		if (null != locale) {
@@ -45,7 +45,7 @@ public class LocaleController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/locales/{location}/news")
+	@RequestMapping(value = "/api/{version}/{rendition}/locales/{location}/news")
 	public List<String> getNews(@PathVariable String location) {
 		final Locale locale = this.localeService.getLocale(location);
 		if (null != locale) {
@@ -54,7 +54,7 @@ public class LocaleController {
 		return new ArrayList<>();
 	}
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/locales/{location}/stocks", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/{version}/{rendition}/locales/{location}/stocks", method = RequestMethod.GET)
 	public List<StockInfo> getStocks(@PathVariable String location) {
 		List<StockInfo> stocks = new ArrayList<>();
 		final Locale locale = this.localeService.getLocale(location);
@@ -64,7 +64,7 @@ public class LocaleController {
 		return stocks;
 	}
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/locales/{location}/employees", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/{version}/{rendition}/locales/{location}/employees", method = RequestMethod.GET)
 	public List<Employee> getEmployees(@PathVariable String location) {
 		List<Employee> employees = new ArrayList<>();
 		

@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.xpanxion.wallboard.rest.dto.locale.Locale;
 
-public interface LocaleDao extends CrudRepository<Locale, Long>{
+public interface HibernateLocaleDao extends CrudRepository<Locale, Long> {
 
 	Locale findByCode(String code);
 }

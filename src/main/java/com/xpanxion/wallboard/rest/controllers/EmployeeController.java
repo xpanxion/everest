@@ -20,7 +20,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/employees", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/{version}/{rendition}/employees", method = RequestMethod.GET)
 	public List<Employee> getAllEmployees(@RequestParam(required = false) String location) {
 		
 		final EmployeeSearchRequest searchRequest = new EmployeeSearchRequest();
@@ -29,26 +29,26 @@ public class EmployeeController {
 		return this.employeeService.getEmployees(searchRequest);
 	}
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/employees/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/{version}/{rendition}/employees/{id}", method = RequestMethod.GET)
 	public Employee getEmployeeById(@PathVariable Long id) {
 		final EmployeeSearchRequest searchRequest = new EmployeeSearchRequest();
 		ListUtils.nullSafeAdd(searchRequest.getIds(), id);
 		return this.employeeService.getEmployees(searchRequest).get(0);
 	}
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/employees/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/api/{version}/{rendition}/employees/{id}", method = RequestMethod.POST)
 	public Employee updateEmployee(@PathVariable Long id) {
 		// TODO
 		throw new UnsupportedOperationException();
 	}
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/employees/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/api/{version}/{rendition}/employees/{id}", method = RequestMethod.DELETE)
 	public Employee deleteEmployee(@PathVariable Long id) {
 		// TODO
 		throw new UnsupportedOperationException();
 	}
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/employees/add", method = RequestMethod.PUT)
+	@RequestMapping(value = "/api/{version}/{rendition}/employees/add", method = RequestMethod.PUT)
 	public Employee addNewEmployee(Employee employee) {
 		return this.employeeService.saveEmployee(employee);
 	}

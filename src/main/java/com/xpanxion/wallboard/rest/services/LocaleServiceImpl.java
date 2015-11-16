@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.xpanxion.wallboard.rest.dao.hibernate.LocaleAliasDao;
-import com.xpanxion.wallboard.rest.dao.hibernate.LocaleDao;
+import com.xpanxion.wallboard.rest.dao.hibernate.HibernateLocaleAliasDao;
+import com.xpanxion.wallboard.rest.dao.hibernate.HibernateLocaleDao;
 import com.xpanxion.wallboard.rest.dto.locale.Locale;
 import com.xpanxion.wallboard.rest.dto.locale.LocaleAlias;
 
@@ -13,10 +13,10 @@ import com.xpanxion.wallboard.rest.dto.locale.LocaleAlias;
 public class LocaleServiceImpl implements LocaleService {
 
 	@Autowired
-	private LocaleDao localeDao;
+	private HibernateLocaleDao localeDao;
 	
 	@Autowired
-	private LocaleAliasDao localeAliasDao;
+	private HibernateLocaleAliasDao localeAliasDao;
 	
 	@Override
 	public Locale getLocale(String location) {

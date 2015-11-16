@@ -19,12 +19,12 @@ public class StockInfoController {
 	@Autowired
 	private WebToolsService webToolsService;
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/stocks/{stockSymbol}", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/{version}/{rendition}/stocks/{stockSymbol}", method = RequestMethod.GET)
 	public StockInfo getStock(@PathVariable String stockSymbol) {
 		return this.webToolsService.getStockInfo(stockSymbol);
 	}
 	
-	@RequestMapping(value = "/api/{rendition}/{version}/stocks", method = RequestMethod.GET)
+	@RequestMapping(value = "/api/{version}/{rendition}/stocks", method = RequestMethod.GET)
 	public List<StockInfo> getStocks(@RequestParam List<String> stockSymbols) {
 		final List<StockInfo> stocks = new ArrayList<>();
 		for(String stockSymbol : stockSymbols) {
