@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.xpanxion.wallboard.rest.config.security.token.ApiTokenAuthenticationProvider;
 import com.xpanxion.wallboard.rest.config.security.token.StatelessTokenAuthenticationFilter;
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig {
 	
 	@Bean

@@ -3,12 +3,14 @@ package com.xpanxion.wallboard.rest.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xpanxion.wallboard.rest.config.security.SecurityProperties.SecurityRoles;
 import com.xpanxion.wallboard.rest.dto.kudos.Kudo;
 import com.xpanxion.wallboard.rest.services.KudoService;
 
@@ -35,7 +37,7 @@ public class KudosController {
 		throw new UnsupportedOperationException();
 	}
 	
-	// TODO - Secure this
+	@Secured({ SecurityRoles.API_ADMIN })
 	@RequestMapping(value = "/api/{version}/{rendition}/kudos/add", method = RequestMethod.POST)
 	public Kudo addKudo(@RequestBody Kudo kudo) {
 		return this.kudoService.createNewKudo(kudo);
@@ -46,6 +48,7 @@ public class KudosController {
 		return this.kudoService.getKudoById(kudoId);
 	}
 	
+	@Secured({ SecurityRoles.API_ADMIN })
 	@RequestMapping(value = "/api/{version}/{rendition}/kudos/{kudoId}", method = RequestMethod.DELETE)
 	public void deleteKudo(@PathVariable Long kudoId) {
 		this.kudoService.deleteKudoById(kudoId);
