@@ -52,4 +52,5 @@ public class EmployeeController {
 	public Employee addNewEmployee(Employee employee) {
 		return this.employeeService.saveEmployee(employee);
 	}
+
 }
