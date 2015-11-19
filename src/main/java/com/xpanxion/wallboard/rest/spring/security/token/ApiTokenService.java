@@ -1,4 +1,4 @@
-package com.xpanxion.wallboard.rest.config.security.token;
+package com.xpanxion.wallboard.rest.spring.security.token;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.xpanxion.wallboard.rest.config.security;
+package com.xpanxion.wallboard.rest.spring.security;
 
 public class SecurityProperties {
 

@@ -1,4 +1,4 @@
-package com.xpanxion.wallboard.rest.config.security;
+package com.xpanxion.wallboard.rest.spring.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,8 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.xpanxion.wallboard.rest.config.security.token.ApiTokenAuthenticationProvider;
-import com.xpanxion.wallboard.rest.config.security.token.StatelessTokenAuthenticationFilter;
+import com.xpanxion.wallboard.rest.spring.security.token.ApiTokenAuthenticationProvider;
+import com.xpanxion.wallboard.rest.spring.security.token.StatelessTokenAuthenticationFilter;
 
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig {

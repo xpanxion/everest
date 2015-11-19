@@ -1,4 +1,4 @@
-package com.xpanxion.wallboard.rest.config.security.token;
+package com.xpanxion.wallboard.rest.spring.security.token;
 
 import java.util.regex.Pattern;
 
