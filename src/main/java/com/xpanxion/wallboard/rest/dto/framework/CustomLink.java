@@ -1,4 +1,4 @@
-package com.xpanxion.wallboard.rest.spring.rest;
+package com.xpanxion.wallboard.rest.dto.framework;
 
 import javax.xml.bind.annotation.XmlAttribute;
 

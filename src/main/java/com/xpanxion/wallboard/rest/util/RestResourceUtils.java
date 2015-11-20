@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 
-import com.xpanxion.wallboard.rest.spring.rest.CustomLink;
+import com.xpanxion.wallboard.rest.dto.framework.CustomLink;
 
 public class RestResourceUtils {
 
@@ -17,7 +17,7 @@ public class RestResourceUtils {
 	
 	public static CustomLink buildCustomLink(Link link, String method) {
 		final CustomLink customLink = new CustomLink(link);
-		customLink.setMethod("post");
+		customLink.setMethod(method);
 		return customLink;
 	}
 	
