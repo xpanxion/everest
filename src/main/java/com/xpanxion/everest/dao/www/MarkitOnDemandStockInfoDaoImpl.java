@@ -29,8 +29,8 @@ public class MarkitOnDemandStockInfoDaoImpl implements StockInfoDao {
 	public static final int MAX_NUMBER_STOCK_TICKERS = 10;
 	
 	private final Map<String, StockInfo> cache = new HashMap<String, StockInfo>();	
-	private final String stockURLPattern = "http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol=%s";
-	private final Integer timeInCache = 300000;
+	private String stockURLPattern = "http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol=%s";
+	private Integer timeInCache = 300000;
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 	
@@ -98,5 +98,13 @@ public class MarkitOnDemandStockInfoDaoImpl implements StockInfoDao {
 			(new Thread(new StockRetrievalTask(this, entry.getKey()))).start();
 		}
 		LOG.info("*** Stock Retrieval Job executed ***");
+	}
+
+	public void setStockURLPattern(String stockURLPattern) {
+		this.stockURLPattern = stockURLPattern;
+	}
+
+	public void setCacheTime(int timeInCache) {
+		this.timeInCache = timeInCache;
 	}
 }

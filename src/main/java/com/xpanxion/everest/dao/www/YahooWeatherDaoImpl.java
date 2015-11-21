@@ -80,4 +80,12 @@ public class YahooWeatherDaoImpl implements WeatherDao {
 		}
 		return parser.getWeather();
 	}
+	
+	public void setCacheTime(int ms) {
+		this.cacheTime = ms;
+	}
+	
+	public void setWeatherURLPattern(String urlPattern) {
+		this.weatherURLPattern = urlPattern;
+	}
 }

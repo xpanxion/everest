@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xpanxion.everest.controllers.BaseController;
 import com.xpanxion.everest.dto.stock.StockInfo;
 import com.xpanxion.everest.services.WebToolsService;
+import com.xpanxion.everest.util.ListUtils;
 
 @RestController
 public class StockInfoServiceController extends BaseController {
@@ -31,7 +32,7 @@ public class StockInfoServiceController extends BaseController {
 	public ResponseEntity<List<StockInfo>> getStocks(@RequestParam List<String> stockSymbols) {
 		final List<StockInfo> stocks = new ArrayList<>();
 		for(String stockSymbol : stockSymbols) {
-			stocks.add(this.webToolsService.getStockInfo(stockSymbol));
+			ListUtils.nullSafeAdd(stocks, this.webToolsService.getStockInfo(stockSymbol));
 		}
 		return ResponseEntity.ok(stocks);
 	}
