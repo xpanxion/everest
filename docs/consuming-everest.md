@@ -11,4 +11,4 @@ Assuming the application is hosted at _HOST\_NAME_, the application should be ac
 ##Security Token
 In order to view content, Everest requires authentication in the form of an HTTP Header token. Tokens will likely be managed by the Everest server administrator.  
 
-Once a token has been provided, the token may be passed under the HTTP Header: X\_AUTH\_TOKEN.
+Once a token has been provided, the token may be passed under the HTTP Header: X-AUTH-TOKEN.
