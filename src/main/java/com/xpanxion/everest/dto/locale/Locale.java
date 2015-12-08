@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xpanxion.everest.dto.employee.Employee;
 import com.xpanxion.everest.dto.stock.StockInfo;
 import com.xpanxion.everest.dto.weather.Weather;
@@ -53,12 +54,14 @@ public class Locale implements Serializable {
 	private String newsKeywords;
 	
 	@Transient
+	@JsonIgnore
 	private List<String> news;
 
 	@Column
 	private String stockSymbols;
 
 	@Transient
+	@JsonIgnore
 	private List<StockInfo> stocks;
 
 	@Column
@@ -68,6 +71,7 @@ public class Locale implements Serializable {
 	private String weatherCode;
 
 	@Transient
+	@JsonIgnore
 	private Weather weather;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "locale")

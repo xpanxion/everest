@@ -1,6 +1,5 @@
 package com.xpanxion.everest.spring.rest.dtoprocessors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceProcessor;
@@ -9,14 +8,10 @@ import org.springframework.stereotype.Component;
 
 import com.xpanxion.everest.controllers.data.ApiDataLocaleController;
 import com.xpanxion.everest.dto.locale.Locale;
-import com.xpanxion.everest.services.LocaleService;
 import com.xpanxion.everest.util.RestResourceUtils;
 
 @Component
 public class LocaleDtoProcessor {
-	
-	@Autowired
-	private LocaleService localeService;
 	
 	@Bean
 	public ResourceProcessor<Resource<Locale>> localeProcessor() {
@@ -26,7 +21,6 @@ public class LocaleDtoProcessor {
 			@Override
 			public Resource<Locale> process(Resource<Locale> resource) {
 				final Locale locale = resource.getContent();
-				localeService.populateWebContent(locale);
 				
 				// Add the custom links
 				resource.add(ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(ApiDataLocaleController.class)
