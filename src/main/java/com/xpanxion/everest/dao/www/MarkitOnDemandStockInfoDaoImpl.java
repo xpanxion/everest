@@ -80,8 +80,7 @@ public class MarkitOnDemandStockInfoDaoImpl implements StockInfoDao {
 			stockInfo = mapper.readValue(jsonData, StockInfo.class);
 			
 		} catch (IOException e) {
-			LOG.error("Unable to connect to stock feed for {}", symbol);
-			throw new RuntimeException(e);
+			LOG.error("Unable to connect to stock feed for {}. It will be skipped.", symbol);
 		}
 		
 		return stockInfo;
