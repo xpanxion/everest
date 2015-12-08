@@ -5,24 +5,56 @@ Everest is a HATEOAS compliant RESTful web service that exposes custom workplace
 [![Build Status](https://travis-ci.org/xpanxion/everest.svg)](https://travis-ci.org/xpanxion/everest) [![Coverage Status](https://coveralls.io/repos/xpanxion/everest/badge.svg?branch=master&service=github)](https://coveralls.io/github/xpanxion/everest?branch=master) master
 
 ##Install
-1) Assuming that MySQL server has been installed, first create a database schema using the following.  This only needs to be done once.  
+**1) Setup**  
+Assuming that MySQL server has been installed, first create a database schema using the following.  This only needs to be done once.  
 ```mysql
 CREATE DATABASE everest;
 ```
 
-2) Build the project using maven:  
+**2) Build**  
+Build the project using maven:  
 ```bash
 cd PROJECT_DIRECTORY
 mvn install
 ```  
 This will build the project's **everest.jar** file to PROJECT_DIRECTORY/target/everest.jar.  
 
-3) Next, the application can be deployed locally by running the following in a terminal session:  
+**3) Deploy**  
+There are a few ways to deploy the application locally.  
+
+3a) Command Line  
+Next, the application can be deployed locally by running the following in a terminal session:  
 ```bash
-java -jar everest.jar
+java -jar target/everest.jar
 ```
 
-At this point the application should be up and running at http://127.0.0.1:8080/api.  
+3b) IDE  
+If you prefer, you may run the application directly out of your IDE by running **Application.java** located in the src/main/java directory. This is possible thanks to Spring Boot.  
+
+**4) Authentication**  
+Before we can use the application, we must add our authentication credentials. The application currently requires simple token based authentication in the form of an HTTP header. If you are using a web browser, use your favorite plugin (we suggest Modify Headers: [For Chrome](https://chrome.google.com/webstore/detail/modify-headers-for-google/innpjfdalfhpcoinfnehdnbkglpmogdi?hl=en-US), [For Firefox](https://addons.mozilla.org/en-US/firefox/addon/modify-headers/)).  
+
+Set the following header:  
+
+```
+X-AUTH-TOKEN: 5d89az-x8a7q264-115z9fpq-91acq4
+```
+
+**5) Test**  
+At this point the application should be up and running at http://127.0.0.1:8080/api. Assuming you have completed everything correctly, you should see a response similar to the following: 
+
+```json
+{
+  "_links" : {
+    "data" : {
+      "href" : "http://127.0.0.1:8080/api/data"
+    },
+    "service" : {
+      "href" : "http://127.0.0.1:8080/api/service"
+    }
+  }
+}
+```
 
 Additional information regarding the install process can be found in the [Deploying Everest](docs/deploying-everest.md) document.
 
