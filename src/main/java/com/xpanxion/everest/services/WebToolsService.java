@@ -2,6 +2,7 @@ package com.xpanxion.everest.services;
 
 import java.util.List;
 
+import com.xpanxion.everest.dto.news.NewsContent;
 import com.xpanxion.everest.dto.stock.StockInfo;
 import com.xpanxion.everest.dto.weather.Weather;
 
@@ -33,5 +34,5 @@ public interface WebToolsService {
 	 * @param location
 	 * @return
 	 */
-	List<String> getNews(String location);
+	List<NewsContent> getNews(String location);
 }

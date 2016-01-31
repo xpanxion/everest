@@ -2,6 +2,8 @@ package com.xpanxion.everest.dao;
 
 import java.util.List;
 
+import com.xpanxion.everest.dto.news.NewsContent;
+
 public interface NewsDao {
 	
 	/**
@@ -9,5 +11,5 @@ public interface NewsDao {
 	 * @param keywords
 	 * @return
 	 */
-	List<String> getNews(List<String> keywords);
+	List<NewsContent> getNews(List<String> keywords);
 }

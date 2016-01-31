@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.xpanxion.everest.dto.locale.Locale;
+import com.xpanxion.everest.dto.news.NewsContent;
 import com.xpanxion.everest.dto.stock.StockInfo;
 import com.xpanxion.everest.dto.weather.Weather;
 import com.xpanxion.everest.services.LocaleService;
@@ -68,10 +69,10 @@ public class ApiDataLocaleControllerTest {
 		final String newsKeywords = "ABC,BCD,CDE,DEF";
 		final Locale locale = new Locale();
 		locale.setNewsKeywords(newsKeywords);
-		final List<String> news = new ArrayList<>();
+		final List<NewsContent> news = new ArrayList<>();
 		Mockito.when(this.localeService.getLocale(5L)).thenReturn(locale);
 		Mockito.when(this.webToolsService.getNews(newsKeywords)).thenReturn(news);
-		final ResponseEntity<List<String>> result = this.testee.getNews(5L);
+		final ResponseEntity<List<NewsContent>> result = this.testee.getNews(5L);
 		assertThat(result.getStatusCode(), equalTo(HttpStatus.OK));
 		assertThat(result.getBody(), equalTo(news));
 		Mockito.verify(this.localeService).getLocale(5L);
@@ -81,7 +82,7 @@ public class ApiDataLocaleControllerTest {
 	@Test
 	public void testGetNewsUnknownLocale() {
 		Mockito.when(this.localeService.getLocale(5L)).thenReturn(null);
-		final ResponseEntity<List<String>> result = this.testee.getNews(5L);
+		final ResponseEntity<List<NewsContent>> result = this.testee.getNews(5L);
 		assertThat(result.getStatusCode(), equalTo(HttpStatus.OK));
 		assertThat(result.getBody(), notNullValue());
 		assertThat(result.getBody(), empty());

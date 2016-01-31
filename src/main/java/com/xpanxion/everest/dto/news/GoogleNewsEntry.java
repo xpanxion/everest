@@ -1,9 +1,12 @@
 package com.xpanxion.everest.dto.news;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class GoogleNewsEntry implements NewsContent {
 
 	private String url;
 	private String title;
+	@JsonIgnore
 	private String contentSnippet;
 	private String link;
 	
