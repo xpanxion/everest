@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.xpanxion.everest.dao.NewsDao;
 import com.xpanxion.everest.dao.StockInfoDao;
 import com.xpanxion.everest.dao.WeatherDao;
+import com.xpanxion.everest.dto.news.NewsContent;
 import com.xpanxion.everest.dto.stock.StockInfo;
 import com.xpanxion.everest.dto.weather.Weather;
 import com.xpanxion.everest.exception.StockNotFoundException;
@@ -47,7 +48,7 @@ public class WebToolsServiceImpl implements WebToolsService {
 	 * TODO - Return a <tt>List</tt> of POJO objects (e.g. <tt>NewsContent</tt> instead of <tt>String</tt>)
 	 */
 	@Override
-	public List<String> getNews(String keywords) {
+	public List<NewsContent> getNews(String keywords) {
 		
 		if (null == keywords) {
 			return new ArrayList<>();

@@ -48,7 +48,7 @@ public class WeatherFeedParser extends DefaultHandler {
 					this.condition = weather;
 				}
 			}
-			this.weather.setCondition(this.condition);
+			this.weather.setCondition(this.condition.getIcon());
 			this.weather.setCurrentTemp(attribute.getValue("temp") + " F");
 		} else if (FORCAST_ELEMENT.equals(weatherElement)) {
 			if (!this.tonightDone) {
@@ -58,7 +58,7 @@ public class WeatherFeedParser extends DefaultHandler {
 						this.condition = weather;
 					}
 				}
-				this.weather.setTonightCondition(this.condition);
+				this.weather.setTonightCondition(this.condition.getIcon());
 				this.tonightDone = true;
 			} else if (!this.tomarrowDone) {
 				this.weather.setTomorrowHigh(attribute.getValue("high") + " F");
@@ -68,7 +68,7 @@ public class WeatherFeedParser extends DefaultHandler {
 						this.condition = weather;
 					}
 				}
-				this.weather.setTomorrowCondition(this.condition);
+				this.weather.setTomorrowCondition(this.condition.getIcon());
 				this.tomarrowDone = true;
 			} else if (!this.nextDayDone) {
 				this.weather.setDayAfterHigh(attribute.getValue("high") + " F");
@@ -78,7 +78,7 @@ public class WeatherFeedParser extends DefaultHandler {
 						this.condition = weather;
 					}
 				}
-				this.weather.setDayAfterCondition(this.condition);
+				this.weather.setDayAfterCondition(this.condition.getIcon());
 				for (DayAfter day : DayAfter.values()) {
 					if (day.getDay().equals(attribute.getValue("day"))) {
 						this.current = day;

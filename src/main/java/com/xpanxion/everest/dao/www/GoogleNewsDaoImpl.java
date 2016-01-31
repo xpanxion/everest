@@ -19,6 +19,8 @@ import org.springframework.stereotype.Repository;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xpanxion.everest.dao.NewsDao;
+import com.xpanxion.everest.dto.news.GoogleNewsEntry;
+import com.xpanxion.everest.dto.news.NewsContent;
 
 @Repository
 public class GoogleNewsDaoImpl implements NewsDao {
@@ -41,7 +43,7 @@ public class GoogleNewsDaoImpl implements NewsDao {
 	}
 	
 	@Override
-	public List<String> getNews(List<String> keywords) {
+	public List<NewsContent> getNews(List<String> keywords) {
 		final StringBuilder newsQueryString = new StringBuilder();
 		for(int i = 0; i < keywords.size(); i++) {
 			final String formattedKeyword = keywords.get(i).replaceAll(SPACE, PLUS);
@@ -54,8 +56,8 @@ public class GoogleNewsDaoImpl implements NewsDao {
 		return this.fetchNewsFromGoogle(newsUrl);
 	}
 	
-	private List<String> fetchNewsFromGoogle(String url) {
-		final List<String> news = new ArrayList<>();
+	private List<NewsContent> fetchNewsFromGoogle(String url) {
+		final List<NewsContent> news = new ArrayList<>();
 		
 		final StringBuilder builder = new StringBuilder();
 		String line;
@@ -74,7 +76,13 @@ public class GoogleNewsDaoImpl implements NewsDao {
 			if (HttpServletResponse.SC_OK == jsonResponse.getInt("responseStatus")) {
 				final JSONArray newsEntriesJson = jsonResponse.getJSONObject("responseData").getJSONArray("entries");
 				for(int i = 0; i < newsEntriesJson.length(); i++) {
-					news.add(newsEntriesJson.getJSONObject(i).toString());
+					final JSONObject newsEntryJson = newsEntriesJson.getJSONObject(i);
+					final GoogleNewsEntry newsEntry = new GoogleNewsEntry();
+					newsEntry.setUrl(newsEntryJson.getString("url"));
+					newsEntry.setTitle(newsEntryJson.getString("title"));
+					newsEntry.setLink(newsEntryJson.getString("link"));
+					newsEntry.setContentSnippet(newsEntryJson.getString("contentSnippet"));
+					news.add(newsEntry);
 				}
 			}
 		} catch (Exception e) {

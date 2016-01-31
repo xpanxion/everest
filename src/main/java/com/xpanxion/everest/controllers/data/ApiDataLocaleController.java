@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.xpanxion.everest.controllers.BaseController;
 import com.xpanxion.everest.dto.locale.Locale;
+import com.xpanxion.everest.dto.news.NewsContent;
 import com.xpanxion.everest.dto.stock.StockInfo;
 import com.xpanxion.everest.dto.weather.Weather;
 import com.xpanxion.everest.services.LocaleService;
@@ -37,9 +38,9 @@ public class ApiDataLocaleController extends BaseController {
 	}
 	
 	@RequestMapping(value = BASE_PATH + "/data/locales/{id}/news")
-	public ResponseEntity<List<String>> getNews(@PathVariable Long id) {
+	public ResponseEntity<List<NewsContent>> getNews(@PathVariable Long id) {
 		final Locale locale = this.localeService.getLocale(id);
-		List<String> news = new ArrayList<>();
+		List<NewsContent> news = new ArrayList<>();
 		if (null != locale) {
 			news = this.webToolsService.getNews(locale.getNewsKeywords());
 		}

@@ -15,6 +15,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xpanxion.everest.dto.employee.Employee;
+import com.xpanxion.everest.dto.news.NewsContent;
 import com.xpanxion.everest.dto.stock.StockInfo;
 import com.xpanxion.everest.dto.weather.Weather;
 
@@ -55,7 +56,7 @@ public class Locale implements Serializable {
 	
 	@Transient
 	@JsonIgnore
-	private List<String> news;
+	private List<NewsContent> news;
 
 	@Column
 	private String stockSymbols;
@@ -179,11 +180,11 @@ public class Locale implements Serializable {
 		this.weather = weather;
 	}
 
-	public List<String> getNews() {
+	public List<NewsContent> getNews() {
 		return news;
 	}
 
-	public void setNews(List<String> news) {
+	public void setNews(List<NewsContent> news) {
 		this.news = news;
 	}
 	

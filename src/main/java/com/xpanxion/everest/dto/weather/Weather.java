@@ -3,19 +3,19 @@ package com.xpanxion.everest.dto.weather;
 public class Weather {
 
 	private String city;
-	private WeatherCondition condition;
+	private String condition;
 	private String currentTemp;
-	private WeatherCondition dayAfterCondition;
+	private String dayAfterCondition;
 	private DayAfter dayAfterDate;
 	private String dayAfterHigh;
 	private String dayAfterLow;
 	private long retrevalTime; // The time that this weather object was pulled
 								// at.
-	private WeatherCondition tomorrowCondition;
+	private String tomorrowCondition;
 	private String tomorrowHigh;
 	private String tomorrowLow;
 	private String tonightLow;
-	private WeatherCondition tonightWeatherIcon;
+	private String tonightWeatherIcon;
 
 	/**
 	 * @return the current city being used
@@ -27,7 +27,7 @@ public class Weather {
 	/**
 	 * @return current weather condition
 	 */
-	public WeatherCondition getCondition() {
+	public String getCondition() {
 		return this.condition;
 	}
 
@@ -41,7 +41,7 @@ public class Weather {
 	/**
 	 * @return expected weather condition for the day after tomorrow
 	 */
-	public WeatherCondition getDayAfterCondition() {
+	public String getDayAfterCondition() {
 		return this.dayAfterCondition;
 	}
 
@@ -76,7 +76,7 @@ public class Weather {
 	/**
 	 * @return expected weather condition for tomorrow
 	 */
-	public WeatherCondition getTomorrowCondition() {
+	public String getTomorrowCondition() {
 		return this.tomorrowCondition;
 	}
 
@@ -99,7 +99,7 @@ public class Weather {
 	 * 
 	 * @return expected weather condition for the evening
 	 */
-	public WeatherCondition getTonightCondition() {
+	public String getTonightCondition() {
 		return this.tonightWeatherIcon;
 	}
 
@@ -124,7 +124,7 @@ public class Weather {
 	 * @param condition
 	 *            current weather condition to be set
 	 */
-	public void setCondition(WeatherCondition condition) {
+	public void setCondition(String condition) {
 		this.condition = condition;
 	}
 
@@ -140,7 +140,7 @@ public class Weather {
 	 * @param dayAfterCondition
 	 *            expected weather condition to be set
 	 */
-	public void setDayAfterCondition(WeatherCondition dayAfterCondition) {
+	public void setDayAfterCondition(String dayAfterCondition) {
 		this.dayAfterCondition = dayAfterCondition;
 	}
 
@@ -180,7 +180,7 @@ public class Weather {
 	 * @param tomorrowCondition
 	 *            expected weather condition to be set
 	 */
-	public void setTomorrowCondition(WeatherCondition tomorrowCondition) {
+	public void setTomorrowCondition(String tomorrowCondition) {
 		this.tomorrowCondition = tomorrowCondition;
 	}
 
@@ -206,7 +206,7 @@ public class Weather {
 	 * @param tonightWeatherIcon
 	 *            expected weather condition to be set
 	 */
-	public void setTonightCondition(WeatherCondition tonightWeatherIcon) {
+	public void setTonightCondition(String tonightWeatherIcon) {
 		this.tonightWeatherIcon = tonightWeatherIcon;
 	}
 
