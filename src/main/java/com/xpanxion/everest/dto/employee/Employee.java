@@ -25,7 +25,6 @@ public class Employee {
 	private String lastName;
 	
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name="locale_code", referencedColumnName = "code")
 	private Locale locale;
 	
