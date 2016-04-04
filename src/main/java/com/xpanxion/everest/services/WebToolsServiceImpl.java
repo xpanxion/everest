@@ -1,12 +1,5 @@
 package com.xpanxion.everest.services;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.xpanxion.everest.dao.NewsDao;
 import com.xpanxion.everest.dao.StockInfoDao;
 import com.xpanxion.everest.dao.WeatherDao;
@@ -15,6 +8,12 @@ import com.xpanxion.everest.dto.stock.StockInfo;
 import com.xpanxion.everest.dto.weather.Weather;
 import com.xpanxion.everest.exception.StockNotFoundException;
 import com.xpanxion.everest.util.ListUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class WebToolsServiceImpl implements WebToolsService {
@@ -31,8 +30,8 @@ public class WebToolsServiceImpl implements WebToolsService {
 	private NewsDao newsDao;
 	
 	@Override
-	public Weather getWeather(String location) {
-		return this.weatherDao.getWeather(location);
+	public Weather getWeather(String location, String timeZone) {
+		return this.weatherDao.getWeather(location, timeZone);
 	}
 
 	@Override

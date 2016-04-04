@@ -13,7 +13,7 @@ public interface WebToolsService {
 	 * @param location
 	 * @return
 	 */
-	Weather getWeather(String location);
+	Weather getWeather(String location, String timeZone);
 
 	/**
 	 * 

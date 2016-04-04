@@ -32,7 +32,7 @@ public class ApiDataLocaleController extends BaseController {
 		final Locale locale = this.localeService.getLocale(id);
 		Weather weather = null;
 		if (null != locale) {
-			weather = this.webToolsService.getWeather(locale.getWeatherCode());
+			weather = this.webToolsService.getWeather(locale.getWeatherCode(), locale.getTimeZone());
 		}
 		return ResponseEntity.ok(weather);
 	}

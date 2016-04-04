@@ -13,7 +13,8 @@ public interface WeatherDao {
 	 * 
 	 * @param code
 	 *            the code used to retrieve the weather.
+	 * @param timeZone The time zone for the weather we are wanting.
 	 * @return a weather object.
 	 */
-	Weather getWeather(String code);
+	Weather getWeather(String code, String timeZone);
 }

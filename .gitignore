@@ -9,3 +9,5 @@ src/main/webapp/META-INF
 .orig
 test-output/
 test.jpg
+.idea
+everest.iml
