@@ -18,7 +18,7 @@ public enum DayAfter {
 	 *            shorthand given by Yahoo
 	 * @return the DayAfter set up
 	 */
-	public DayAfter chooseDayAfter(String code) {
+	public static DayAfter chooseDayAfter(String code) {
 		DayAfter current = null;
 
 		for (DayAfter day : DayAfter.values()) {

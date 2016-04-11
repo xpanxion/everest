@@ -5,13 +5,13 @@
 INSERT INTO locale_theme(name, description) VALUES("basic", "Basic theme");
 INSERT INTO locale_theme(name, description) VALUES("modern", "Modern theme");
 
-INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("A", "Atlanta", "US/Eastern", "USGA0028", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("K", "Kearney", "US/Central", "USNE0265", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("P", "Pune", "IST", "INXX0102", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("I", "Ames", "US/Central", "USIA0026", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("C", "Aliso Viejo", "US/Pacific", "USCA0014", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("M", "Manhattan", "US/Central", "USKS0358", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
-INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("FC", "Fort Collins", "US/Mountain", "USCO0105", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("A", "Atlanta", "US/Eastern", "4192375", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("K", "Kearney", "US/Central", "5071348", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("P", "Pune", "IST", "1259229", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("I", "Ames", "US/Central", "4846834", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("C", "Aliso Viejo", "US/Pacific", "5323163", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("M", "Manhattan", "US/Central", "4274994", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
+INSERT INTO locale(code, name, time_zone, weather_code, theme, stock_symbols, news_keywords) VALUES("FC", "Fort Collins", "US/Mountain", "5577147", 1, "CAB,ASPS,RHT,PRI,EFX,FISV,KO,CRD.B", "Xpanxion,UST Global,Rural Outsourcing,rural sourcing");
 
 INSERT INTO locale_alias(locale_code, alias) VALUES("K", "nebraska");
 INSERT INTO locale_alias(locale_code, alias) VALUES("K", "kearney");

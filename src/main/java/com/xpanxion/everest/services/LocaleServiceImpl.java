@@ -1,15 +1,14 @@
 package com.xpanxion.everest.services;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-
 import com.xpanxion.everest.dao.hibernate.HibernateLocaleAliasDao;
 import com.xpanxion.everest.dao.hibernate.HibernateLocaleDao;
 import com.xpanxion.everest.dto.locale.Locale;
 import com.xpanxion.everest.dto.locale.LocaleAlias;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
 
 @Service
 public class LocaleServiceImpl implements LocaleService {
@@ -54,7 +53,7 @@ public class LocaleServiceImpl implements LocaleService {
 	public Locale populateWebContent(Locale locale) {
 		if (null != locale) {
 			locale.setNews(this.webToolsService.getNews(locale.getNewsKeywords()));
-			locale.setWeather(this.webToolsService.getWeather(locale.getWeatherCode()));
+			locale.setWeather(this.webToolsService.getWeather(locale.getWeatherCode(), locale.getTimeZone()));
 			locale.setStocks(this.webToolsService.getStockInfos(locale.getStockSymbols()));
 		}
 		return locale;

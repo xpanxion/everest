@@ -1,13 +1,11 @@
 package com.xpanxion.everest.controllers.data;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.xpanxion.everest.dto.locale.Locale;
+import com.xpanxion.everest.dto.news.NewsContent;
+import com.xpanxion.everest.dto.stock.StockInfo;
+import com.xpanxion.everest.dto.weather.Weather;
+import com.xpanxion.everest.services.LocaleService;
+import com.xpanxion.everest.services.WebToolsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -17,12 +15,11 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.xpanxion.everest.dto.locale.Locale;
-import com.xpanxion.everest.dto.news.NewsContent;
-import com.xpanxion.everest.dto.stock.StockInfo;
-import com.xpanxion.everest.dto.weather.Weather;
-import com.xpanxion.everest.services.LocaleService;
-import com.xpanxion.everest.services.WebToolsService;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class ApiDataLocaleControllerTest {
 
@@ -44,14 +41,15 @@ public class ApiDataLocaleControllerTest {
 	public void testGetWeather() {
 		final Locale locale = new Locale();
 		locale.setWeatherCode("ABCDE");
+		locale.setTimeZone("zone");
 		final Weather weather = new Weather();
 		Mockito.when(this.localeService.getLocale(5L)).thenReturn(locale);
-		Mockito.when(this.webToolsService.getWeather(locale.getWeatherCode())).thenReturn(weather);
+		Mockito.when(this.webToolsService.getWeather(locale.getWeatherCode(), locale.getTimeZone())).thenReturn(weather);
 		final ResponseEntity<Weather> result = this.testee.getWeather(5l);
 		assertThat(result.getStatusCode(), equalTo(HttpStatus.OK));
 		assertThat(result.getBody(), equalTo(weather));
 		Mockito.verify(this.localeService).getLocale(5L);
-		Mockito.verify(this.webToolsService).getWeather(locale.getWeatherCode());
+		Mockito.verify(this.webToolsService).getWeather(locale.getWeatherCode(), locale.getTimeZone());
 	}
 	
 	@Test
