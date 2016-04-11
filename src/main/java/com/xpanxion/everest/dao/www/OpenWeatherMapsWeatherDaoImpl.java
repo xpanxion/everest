@@ -5,6 +5,8 @@ import com.xpanxion.everest.dto.openWeather.Forecast;
 import com.xpanxion.everest.dto.openWeather.ForecastResponse;
 import com.xpanxion.everest.dto.weather.DayAfter;
 import com.xpanxion.everest.dto.weather.Weather;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -69,7 +71,8 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
         Forecast current = response.getList().get(0);
         weather.setCondition(current.getWeather().get(0).getDescription());
         weather.setCurrentTemp(Double.toString(current.getMain().getTemp()));
-
+        weather.setCurrentWeatherIcon(current.getWeather().get(0).getIcon());
+        
         Forecast tonight = getTonightForecast(response.getList(), current.getDt() * 1000, timeZone);
         weather.setTonightLow(Double.toString(tonight.getMain().getMinTemp()));
         weather.setTonightCondition(tonight.getWeather().get(0).getDescription());
@@ -79,12 +82,14 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
         weather.setTomorrowCondition(tomorrow.getWeather().get(0).getDescription());
         weather.setTomorrowHigh(Double.toString(tomorrow.getMain().getMaxTemp()));
         weather.setTomorrowLow(Double.toString(tomorrow.getMain().getMinTemp()));
+        weather.setTomorrowWeatherIcon(tomorrow.getWeather().get(0).getIcon());
 
         Forecast dayAfter = response.getList().get(16);
         weather.setDayAfterCondition(dayAfter.getWeather().get(0).getDescription());
         weather.setDayAfterDate(getDayAfter(dayAfter.getDt() * 1000, timeZone));
         weather.setDayAfterHigh(Double.toString(dayAfter.getMain().getMaxTemp()));
         weather.setDayAfterLow(Double.toString(dayAfter.getMain().getMinTemp()));
+        weather.setDayAfterWeatherIcon(dayAfter.getWeather().get(0).getIcon());
 
         return weather;
     }
