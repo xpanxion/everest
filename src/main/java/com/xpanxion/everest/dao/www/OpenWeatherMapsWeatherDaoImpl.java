@@ -1,8 +1,7 @@
 package com.xpanxion.everest.dao.www;
 
 import com.xpanxion.everest.dao.WeatherDao;
-import com.xpanxion.everest.dto.openWeather.Forecast;
-import com.xpanxion.everest.dto.openWeather.ForecastResponse;
+import com.xpanxion.everest.dto.openWeather.*;
 import com.xpanxion.everest.dto.weather.DayAfter;
 import com.xpanxion.everest.dto.weather.Weather;
 import org.joda.time.DateTime;
@@ -34,6 +33,12 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
     @Value("${open.weather.forcast.url}")
     private String openWeatherURL;
 
+    @Value("${open.weather.dailyforecast.url}")
+    private String openWeatherURLDaily;
+
+    @Value("${open.weather.current.url}")
+    private String openWeatherURLCurrent;
+
     @Value("${open.weather.api.key}")
     private String apiKey;
 
@@ -49,8 +54,61 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
     @Override
     @Cacheable("weather")
     public Weather getWeather(String code, String timeZone) {
-        ForecastResponse response = weatherTemplate.getForObject(openWeatherURL, ForecastResponse.class, code, apiKey);
-        return convertToWeather(response, timeZone);
+//        ForecastResponse response = weatherTemplate.getForObject(openWeatherURL, ForecastResponse.class, code, apiKey);
+//        return convertToWeather(response, timeZone);
+        Forecast16Response daily = getDailyConditions(code, timeZone);
+        CurrentResponse current = getCurrentConditions(code, timeZone);
+
+        return convertToWeather(current, daily, timeZone);
+    }
+
+    @Cacheable("weather")
+    public Forecast16Response getDailyConditions(String code, String timeZone) {
+        Forecast16Response response = weatherTemplate.getForObject(openWeatherURLDaily, Forecast16Response.class, code, apiKey);
+        return response;
+    }
+
+    @Cacheable("weather")
+    public CurrentResponse getCurrentConditions(String code, String timeZone) {
+        CurrentResponse response = weatherTemplate.getForObject(openWeatherURLCurrent, CurrentResponse.class, code, apiKey);
+        return response;
+    }
+
+    /**
+     * Converts a response object to a Weather object
+     *
+     * @param response the response to convert from.
+     * @param timeZone the time zone of the city that the response is for
+     * @return the final Converted Weather object.
+     */
+    private Weather convertToWeather(CurrentResponse current, Forecast16Response daily, String timeZone) {
+        Weather weather = new Weather();
+        weather.setCity(current.getName());
+        weather.setRetrevalTime(System.currentTimeMillis());
+
+        weather.setCondition(current.getWeather().get(0).getDescription());
+        weather.setCurrentTemp(Double.toString(current.getMain().getTemp()));
+        weather.setCurrentWeatherIcon(current.getWeather().get(0).getIcon());
+
+        DailyForecast tonight = daily.getList().get(0);
+        weather.setTonightLow(Double.toString(tonight.getTemp().getNight()));
+        //This is not quite right in the daily forecast.  It may be that we still need the hourly data.
+        weather.setTonightCondition(tonight.getWeather().get(0).getDescription());
+
+        DailyForecast tomorrow = daily.getList().get(1);
+        weather.setTomorrowCondition(tomorrow.getWeather().get(0).getDescription());
+        weather.setTomorrowHigh(Double.toString(tomorrow.getTemp().getMax()));
+        weather.setTomorrowLow(Double.toString(tomorrow.getTemp().getMin()));
+        weather.setTomorrowWeatherIcon(tomorrow.getWeather().get(0).getIcon());
+
+        DailyForecast dayAfter = daily.getList().get(2);
+        weather.setDayAfterCondition(dayAfter.getWeather().get(0).getDescription());
+        weather.setDayAfterDate(getDayAfter(dayAfter.getDt() * 1000, timeZone));
+        weather.setDayAfterHigh(Double.toString(dayAfter.getTemp().getMax()));
+        weather.setDayAfterLow(Double.toString(dayAfter.getTemp().getMin()));
+        weather.setDayAfterWeatherIcon(dayAfter.getWeather().get(0).getIcon());
+
+        return weather;
     }
 
     /**
