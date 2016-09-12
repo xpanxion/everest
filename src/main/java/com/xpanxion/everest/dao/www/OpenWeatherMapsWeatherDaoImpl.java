@@ -28,7 +28,7 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(OpenWeatherMapsWeatherDaoImpl.class);
 
-
+    private static final String ICON_URL_FMT = "http://openweathermap.org/img/w/%s.png";
     private static final String DAY_0F_WEEK = "EEE";
 
     @Value("${open.weather.forcast.url}")
@@ -69,22 +69,25 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
         Forecast current = response.getList().get(0);
         weather.setCondition(current.getWeather().get(0).getDescription());
         weather.setCurrentTemp(Double.toString(current.getMain().getTemp()));
+        weather.setCurrentWeatherIcon(String.format(ICON_URL_FMT, current.getWeather().get(0).getIcon()));
 
         Forecast tonight = getTonightForecast(response.getList(), current.getDt() * 1000, timeZone);
         weather.setTonightLow(Double.toString(tonight.getMain().getMinTemp()));
-        weather.setTonightCondition(tonight.getWeather().get(0).getDescription());
+        weather.setTonightWeatherIcon(String.format(ICON_URL_FMT, tonight.getWeather().get(0).getIcon()));
 
         //forecasts are given in 3 hour increments so 24 hours from now would be 24 / 3 or 8.
         Forecast tomorrow = response.getList().get(8);
         weather.setTomorrowCondition(tomorrow.getWeather().get(0).getDescription());
         weather.setTomorrowHigh(Double.toString(tomorrow.getMain().getMaxTemp()));
         weather.setTomorrowLow(Double.toString(tomorrow.getMain().getMinTemp()));
+        weather.setTomorrowWeatherIcon(String.format(ICON_URL_FMT, tomorrow.getWeather().get(0).getIcon()));
 
         Forecast dayAfter = response.getList().get(16);
         weather.setDayAfterCondition(dayAfter.getWeather().get(0).getDescription());
         weather.setDayAfterDate(getDayAfter(dayAfter.getDt() * 1000, timeZone));
         weather.setDayAfterHigh(Double.toString(dayAfter.getMain().getMaxTemp()));
         weather.setDayAfterLow(Double.toString(dayAfter.getMain().getMinTemp()));
+        weather.setDayAfterWeatherIcon(String.format(ICON_URL_FMT, dayAfter.getWeather().get(0).getIcon()));
 
         return weather;
     }

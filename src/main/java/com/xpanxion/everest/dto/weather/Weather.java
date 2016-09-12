@@ -5,15 +5,21 @@ public class Weather {
 	private String city;
 	private String condition;
 	private String currentTemp;
+
+	private String currentWeatherIcon;
 	private String dayAfterCondition;
 	private DayAfter dayAfterDate;
 	private String dayAfterHigh;
 	private String dayAfterLow;
+	private String dayAfterWeatherIcon;
+
 	private long retrevalTime; // The time that this weather object was pulled
 								// at.
 	private String tomorrowCondition;
 	private String tomorrowHigh;
 	private String tomorrowLow;
+	private String tomorrowWeatherIcon;
+
 	private String tonightLow;
 	private String tonightWeatherIcon;
 
@@ -36,6 +42,10 @@ public class Weather {
 	 */
 	public String getCurrentTemp() {
 		return this.currentTemp;
+	}
+
+	public String getCurrentWeatherIcon() {
+		return currentWeatherIcon;
 	}
 
 	/**
@@ -66,6 +76,10 @@ public class Weather {
 		return this.dayAfterLow;
 	}
 
+	public String getDayAfterWeatherIcon() {
+		return dayAfterWeatherIcon;
+	}
+
 	/**
 	 * @return the retrevalTime
 	 */
@@ -94,12 +108,16 @@ public class Weather {
 		return this.tomorrowLow;
 	}
 
+	public String getTomorrowWeatherIcon() {
+		return tomorrowWeatherIcon;
+	}
+
 	/**
 	 * Not used, but could be at some point
 	 * 
 	 * @return expected weather condition for the evening
 	 */
-	public String getTonightCondition() {
+	public String getTonightWeatherIcon() {
 		return this.tonightWeatherIcon;
 	}
 
@@ -136,6 +154,10 @@ public class Weather {
 		this.currentTemp = currentTemp;
 	}
 
+	public void setCurrentWeatherIcon(String currentWeatherIcon) {
+		this.currentWeatherIcon = currentWeatherIcon;
+	}
+
 	/**
 	 * @param dayAfterCondition
 	 *            expected weather condition to be set
@@ -166,6 +188,10 @@ public class Weather {
 	 */
 	public void setDayAfterLow(String dayAfterLow) {
 		this.dayAfterLow = dayAfterLow;
+	}
+
+	public void setDayAfterWeatherIcon(String dayAfterWeatherIcon) {
+		this.dayAfterWeatherIcon = dayAfterWeatherIcon;
 	}
 
 	/**
@@ -206,7 +232,7 @@ public class Weather {
 	 * @param tonightWeatherIcon
 	 *            expected weather condition to be set
 	 */
-	public void setTonightCondition(String tonightWeatherIcon) {
+	public void setTonightWeatherIcon(String tonightWeatherIcon) {
 		this.tonightWeatherIcon = tonightWeatherIcon;
 	}
 
@@ -218,5 +244,9 @@ public class Weather {
 	 */
 	public void setTonightLow(String tonightLow) {
 		this.tonightLow = tonightLow;
+	}
+
+	public void setTomorrowWeatherIcon(String tomorrowWeatherIcon) {
+		this.tomorrowWeatherIcon = tomorrowWeatherIcon;
 	}
 }
