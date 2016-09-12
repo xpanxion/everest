@@ -66,12 +66,15 @@ public class OpenWeatherMapsWeatherDaoImplTest {
         assertThat(output.getRetrevalTime(), is(allOf(greaterThanOrEqualTo(start), lessThanOrEqualTo(end))));
         assertThat(output.getCondition(), is("description0"));
         assertThat(output.getCurrentTemp(), is("0.0"));
+        assertThat(output.getCurrentWeatherIcon(), is("http://openweathermap.org/img/w/icon0.png"));
         assertThat(output.getTonightLow(), is( "-97.0"));
-        assertThat(output.getTonightCondition(), is("description3"));
+        assertThat(output.getTonightWeatherIcon(), is("http://openweathermap.org/img/w/icon3.png"));
         assertThat(output.getTomorrowCondition(), is("description8"));
         assertThat(output.getTomorrowHigh(), is("108.0"));
         assertThat(output.getTomorrowLow(), is("-92.0"));
+        assertThat(output.getTomorrowWeatherIcon(), is("http://openweathermap.org/img/w/icon8.png"));
         assertThat(output.getDayAfterCondition(), is("description16"));
+        assertThat(output.getDayAfterWeatherIcon(), is("http://openweathermap.org/img/w/icon16.png"));
 
         DateTime dateTime = DateTime.now(DateTimeZone.UTC).withTime(12,0,0,0).plusHours(48).withZone(DateTimeZone.forID("US/Eastern"));
         assertThat(output.getDayAfterDate(), is(DayAfter.chooseDayAfter(DateTimeFormat.forPattern("EEE").print(dateTime))));
@@ -97,12 +100,15 @@ public class OpenWeatherMapsWeatherDaoImplTest {
         assertThat(output.getRetrevalTime(), is(allOf(greaterThanOrEqualTo(start), lessThanOrEqualTo(end))));
         assertThat(output.getCondition(), is("description0"));
         assertThat(output.getCurrentTemp(), is("0.0"));
+        assertThat(output.getCurrentWeatherIcon(), is("http://openweathermap.org/img/w/icon0.png"));
         assertThat(output.getTonightLow(), is( "-99.0"));
-        assertThat(output.getTonightCondition(), is("description1"));
+        assertThat(output.getTonightWeatherIcon(), is("http://openweathermap.org/img/w/icon1.png"));
         assertThat(output.getTomorrowCondition(), is("description8"));
         assertThat(output.getTomorrowHigh(), is("108.0"));
         assertThat(output.getTomorrowLow(), is("-92.0"));
+        assertThat(output.getTomorrowWeatherIcon(), is("http://openweathermap.org/img/w/icon8.png"));
         assertThat(output.getDayAfterCondition(), is("description16"));
+        assertThat(output.getDayAfterWeatherIcon(), is("http://openweathermap.org/img/w/icon16.png"));
 
         DateTime dateTime = DateTime.now(DateTimeZone.forID("US/Eastern")).withTime(18,0,0,0).plusHours(48);
         assertThat(output.getDayAfterDate(), is(DayAfter.chooseDayAfter(DateTimeFormat.forPattern("EEE").print(dateTime))));
@@ -141,6 +147,7 @@ public class OpenWeatherMapsWeatherDaoImplTest {
         forecast.setDt(date/1000);
         Weather weather = new Weather();
         weather.setDescription("description" + index);
+        weather.setIcon("icon" + index);
 
         forecast.setWeather(Arrays.asList(weather));
 
