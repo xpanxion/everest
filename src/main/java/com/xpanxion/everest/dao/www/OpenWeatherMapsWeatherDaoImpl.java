@@ -1,9 +1,8 @@
 package com.xpanxion.everest.dao.www;
 
-import com.xpanxion.everest.dao.WeatherDao;
-import com.xpanxion.everest.dto.openWeather.*;
-import com.xpanxion.everest.dto.weather.DayAfter;
-import com.xpanxion.everest.dto.weather.Weather;
+import java.util.List;
+import java.util.TimeZone;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -16,8 +15,14 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-import java.util.TimeZone;
+import com.xpanxion.everest.dao.WeatherDao;
+import com.xpanxion.everest.dto.openWeather.CurrentResponse;
+import com.xpanxion.everest.dto.openWeather.DailyForecast;
+import com.xpanxion.everest.dto.openWeather.Forecast;
+import com.xpanxion.everest.dto.openWeather.Forecast16Response;
+import com.xpanxion.everest.dto.openWeather.ForecastResponse;
+import com.xpanxion.everest.dto.weather.DayAfter;
+import com.xpanxion.everest.dto.weather.Weather;
 
 /**
  * Implementation of Weather Dao that uses OpenWeatherMaps and their forecast5 api http://openweathermap.org/forecast5
@@ -27,7 +32,7 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(OpenWeatherMapsWeatherDaoImpl.class);
 
-
+    private static final String ICON_URL_FMT = "http://openweathermap.org/img/w/%s.png";
     private static final String DAY_0F_WEEK = "EEE";
 
     @Value("${open.weather.forcast.url}")
@@ -93,7 +98,7 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
         DailyForecast tonight = daily.getList().get(0);
         weather.setTonightLow(Double.toString(tonight.getTemp().getNight()));
         //This is not quite right in the daily forecast.  It may be that we still need the hourly data.
-        weather.setTonightCondition(tonight.getWeather().get(0).getDescription());
+        weather.setTonightWeatherIcon(tonight.getWeather().get(0).getDescription());
 
         DailyForecast tomorrow = daily.getList().get(1);
         weather.setTomorrowCondition(tomorrow.getWeather().get(0).getDescription());
@@ -107,42 +112,6 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
         weather.setDayAfterHigh(Double.toString(dayAfter.getTemp().getMax()));
         weather.setDayAfterLow(Double.toString(dayAfter.getTemp().getMin()));
         weather.setDayAfterWeatherIcon(dayAfter.getWeather().get(0).getIcon());
-
-        return weather;
-    }
-
-    /**
-     * Converts a response object to a Weather object
-     *
-     * @param response the response to convert from.
-     * @param timeZone the time zone of the city that the response is for
-     * @return the final Converted Weather object.
-     */
-    private Weather convertToWeather(ForecastResponse response, String timeZone) {
-        Weather weather = new Weather();
-        weather.setCity(response.getCity().getName());
-        weather.setRetrevalTime(System.currentTimeMillis());
-
-        //0 is current conditions
-        Forecast current = response.getList().get(0);
-        weather.setCondition(current.getWeather().get(0).getDescription());
-        weather.setCurrentTemp(Double.toString(current.getMain().getTemp()));
-
-        Forecast tonight = getTonightForecast(response.getList(), current.getDt() * 1000, timeZone);
-        weather.setTonightLow(Double.toString(tonight.getMain().getMinTemp()));
-        weather.setTonightCondition(tonight.getWeather().get(0).getDescription());
-
-        //forecasts are given in 3 hour increments so 24 hours from now would be 24 / 3 or 8.
-        Forecast tomorrow = response.getList().get(8);
-        weather.setTomorrowCondition(tomorrow.getWeather().get(0).getDescription());
-        weather.setTomorrowHigh(Double.toString(tomorrow.getMain().getMaxTemp()));
-        weather.setTomorrowLow(Double.toString(tomorrow.getMain().getMinTemp()));
-
-        Forecast dayAfter = response.getList().get(16);
-        weather.setDayAfterCondition(dayAfter.getWeather().get(0).getDescription());
-        weather.setDayAfterDate(getDayAfter(dayAfter.getDt() * 1000, timeZone));
-        weather.setDayAfterHigh(Double.toString(dayAfter.getMain().getMaxTemp()));
-        weather.setDayAfterLow(Double.toString(dayAfter.getMain().getMinTemp()));
 
         return weather;
     }

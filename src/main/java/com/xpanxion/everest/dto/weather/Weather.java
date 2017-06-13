@@ -105,7 +105,7 @@ public class Weather {
 	 * 
 	 * @return expected weather condition for the evening
 	 */
-	public String getTonightCondition() {
+	public String getTonightWeatherIcon() {
 		return this.tonightWeatherIcon;
 	}
 
@@ -212,7 +212,7 @@ public class Weather {
 	 * @param tonightWeatherIcon
 	 *            expected weather condition to be set
 	 */
-	public void setTonightCondition(String tonightWeatherIcon) {
+	public void setTonightWeatherIcon(String tonightWeatherIcon) {
 		this.tonightWeatherIcon = tonightWeatherIcon;
 	}
 
