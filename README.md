@@ -11,6 +11,25 @@ Assuming that MySQL server has been installed, first create a database schema us
 CREATE DATABASE everest;
 ```
 
+### Build the Database
+After the Database is created, we need to configure how the database will be built. How you do this is up to your own personal development preference. A couple of suggested ways are:  
+
+**a) Rebuild on Application Start**  
+Edit the file **src/main/resources/application.properties**. We need to update the field *spring.jpa.hibernate.ddl-auto* to **create**:  
+```
+# Hibernate ddl auto (create, create-drop, update): with "update" the database
+# schema will be automatically updated accordingly to java entities found in
+# the project
+spring.jpa.hibernate.ddl-auto=create
+```
+  
+**b) Build Manually**  
+Open a connection to MySQL and run the file **src/main/resources/import.sql**. E.g.:  
+
+```
+mysql -u root -p < src/main/resources/import.sql
+```
+
 **2) Build**  
 Build the project using maven:  
 ```bash
@@ -22,13 +41,19 @@ This will build the project's **everest.jar** file to PROJECT_DIRECTORY/target/e
 **3) Deploy**  
 There are a few ways to deploy the application locally.  
 
-3a) Command Line  
-Next, the application can be deployed locally by running the following in a terminal session:  
+3a) Command Line via Maven/Spring Tools  
+This will run the project by deploying the project contents using the in-project defined servlet container.
+```bash
+mvn spring-boot:run
+```
+
+3b) Command Line via full build  
+Assuming ```mvn clean install``` has been excuted, this will run the PROJECT_DIRECTORY/target/everest.jar using the in-project defined servlet container.
 ```bash
 java -jar target/everest.jar
 ```
 
-3b) IDE  
+3c) IDE  
 If you prefer, you may run the application directly out of your IDE by running **Application.java** located in the src/main/java directory. This is possible thanks to Spring Boot.  
 
 **4) Authentication**  
