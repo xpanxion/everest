@@ -3,6 +3,8 @@ package com.xpanxion.everest.dao.www;
 import java.util.List;
 import java.util.TimeZone;
 
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -94,7 +96,7 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
         weather.setCondition(current.getWeather().get(0).getDescription());
         weather.setCurrentTemp(Double.toString(current.getMain().getTemp()));
         weather.setCurrentWeatherIcon(current.getWeather().get(0).getIcon());
-
+        
         DailyForecast tonight = daily.getList().get(0);
         weather.setTonightLow(Double.toString(tonight.getTemp().getNight()));
         //This is not quite right in the daily forecast.  It may be that we still need the hourly data.
