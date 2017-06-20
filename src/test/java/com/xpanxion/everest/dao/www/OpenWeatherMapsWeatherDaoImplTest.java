@@ -82,15 +82,15 @@ public class OpenWeatherMapsWeatherDaoImplTest {
         assertThat(output.getRetrevalTime(), is(allOf(greaterThanOrEqualTo(start), lessThanOrEqualTo(end))));
         assertThat(output.getCondition(), is("description0"));
         assertThat(output.getCurrentTemp(), is("0.0"));
-        assertThat(output.getCurrentWeatherIcon(), is("icon0"));
+        assertThat(output.getCurrentWeatherIcon(), is("xyz"));
         assertThat(output.getTonightLow(), is( "50.0"));
-        assertThat(output.getTonightWeatherIcon(), is("icon0"));
+        assertThat(output.getTonightWeatherIcon(), is("xyz"));
         assertThat(output.getTomorrowCondition(), is("description1"));
         assertThat(output.getTomorrowHigh(), is("101.0"));
         assertThat(output.getTomorrowLow(), is("-99.0"));
-        assertThat(output.getTomorrowWeatherIcon(), is("icon1"));
+        assertThat(output.getTomorrowWeatherIcon(), is("xyz"));
         assertThat(output.getDayAfterCondition(), is("description2"));
-        assertThat(output.getDayAfterWeatherIcon(), is("icon2"));
+        assertThat(output.getDayAfterWeatherIcon(), is("xyz"));
 
         DateTime dateTime = DateTime.now(DateTimeZone.UTC).withTime(12,0,0,0).plusHours(48).withZone(DateTimeZone.forID("US/Eastern"));
         assertThat(output.getDayAfterDate(), is(DayAfter.chooseDayAfter(DateTimeFormat.forPattern("EEE").print(dateTime))));
@@ -121,7 +121,7 @@ public class OpenWeatherMapsWeatherDaoImplTest {
         assertThat(output.getCurrentTemp(), is("0.0"));
         assertThat(output.getCurrentWeatherIcon(), is("xyz"));
         assertThat(output.getTonightLow(), is( "50.0"));
-        assertThat(output.getTonightWeatherIcon(), is("icon0"));
+        assertThat(output.getTonightWeatherIcon(), is("xyz"));
         assertThat(output.getTomorrowCondition(), is("description1"));
         assertThat(output.getTomorrowHigh(), is("101.0"));
         assertThat(output.getTomorrowLow(), is("-99.0"));
@@ -170,7 +170,6 @@ public class OpenWeatherMapsWeatherDaoImplTest {
     private DailyForecast getForecast(int index, String timeZone, int currentHour){
         DailyForecast forecast = new DailyForecast();
         forecast.setWeather(Arrays.asList(getWeather(index)));
-        weather.setIcon("xyz");
         DateTime dateTime = DateTime.now(DateTimeZone.forID(timeZone));
         dateTime = dateTime.withTime(currentHour, 0, 0, 0).plusHours(index * 24);
         dateTime= dateTime.withZone(DateTimeZone.UTC);
@@ -189,7 +188,7 @@ public class OpenWeatherMapsWeatherDaoImplTest {
     private Weather getWeather(int index){
         Weather weather = new Weather();
         weather.setDescription("description" + index);
-        weather.setIcon("icon" + index);
+        weather.setIcon("xyz");
         return weather;
     }
 }
