@@ -98,7 +98,7 @@ public class OpenWeatherMapsWeatherDaoImpl implements WeatherDao {
         DailyForecast tonight = daily.getList().get(0);
         weather.setTonightLow(Double.toString(tonight.getTemp().getNight()));
         //This is not quite right in the daily forecast.  It may be that we still need the hourly data.
-        weather.setTonightWeatherIcon(tonight.getWeather().get(0).getDescription());
+        weather.setTonightWeatherIcon(tonight.getWeather().get(0).getIcon());
 
         DailyForecast tomorrow = daily.getList().get(1);
         weather.setTomorrowCondition(tomorrow.getWeather().get(0).getDescription());
